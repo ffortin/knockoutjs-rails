@@ -402,7 +402,11 @@
 						}
 
 						if (hasUpdateCallback()) {
-							mappedRootObject(updateCallback(mappedRootObject));
+					              if (ko.isWriteableObservable(mappedRootObject)) {
+					                mappedRootObject(updateCallback(mappedRootObject));
+					              } else {
+					                mappedRootObject = updateCallback(mappedRootObject);
+					              }
 						}
 						
 						if (hasCreateOrUpdateCallback) return mappedRootObject;
